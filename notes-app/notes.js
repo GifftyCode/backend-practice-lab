@@ -1,31 +1,21 @@
-
 const fs = require("fs");
 const path = require("path");
 
 const dataFile = path.join(__dirname, "data", "notes.json");
 
-
-
-
 function readNotes() {
-    const note  = fs.readFileSync(dataFile, "utf-8")
-    const parsedNote = JSON.parse(note)
+  const note = fs.readFileSync(dataFile, "utf-8");
+  const parsedNote = JSON.parse(note);
 
-    return parsedNote
-
+  return parsedNote;
 }
-
-
 
 function writeNotes(notes) {
- 
-  const stringNote = JSON.stringify(notes, null, 2 )
-  fs.writeFileSync(dataFile, stringNote)
+  const stringNote = JSON.stringify(notes, null, 2);
+  fs.writeFileSync(dataFile, stringNote);
 
-  return stringNote
+  return stringNote;
 }
-
-
 
 // ============================================================
 // MAIN FUNCTIONS — The actual features of your note app
@@ -45,22 +35,22 @@ function writeNotes(notes) {
 //   e) console.log a success message showing the note title.
 function addNote(title, body) {
   // YOUR CODE HERE
- const notes = readNotes()
+  const notes = readNotes();
   const newNote = {
     id: Date.now(),
     title,
     body,
-    createdAt: new Date().toISOString()
-  }
+    createdAt: new Date().toISOString(),
+  };
 
-notes.push(newNote)
+  notes.push(newNote);
 
-writeNotes(notes)
+  writeNotes(notes);
 
-console.log(`${title} added successfully`)
+  console.log(`${title} added successfully`);
 }
 
-addNote("Shopping", "Buy groceries")
+addNote("Shopping", "Buy groceries");
 
 // STEP 6 — Write a function called listNotes.
 // No arguments needed.
@@ -72,9 +62,18 @@ addNote("Shopping", "Buy groceries")
 //   HINT: use notes.forEach() or a for loop
 function listNotes() {
   // YOUR CODE HERE
-
+  const notes = readNotes();
+  if (notes.length <= 0) {
+    console.log("No notes found");
+    return;
+  } else {
+    notes.forEach((note) =>
+      console.log(`[${note.id}] ${note.title} — ${note.body}`),
+    );
+  }
 }
 
+listNotes();
 // STEP 7 — Write a function called deleteNote.
 // It receives: id (a number or string — the note's unique id).
 // Steps:
@@ -86,9 +85,9 @@ function listNotes() {
 //   e) Log a success message.
 function deleteNote(id) {
   // YOUR CODE HERE
-
+  const notes = readNotes();
+  notes.filter((note) => note.id !== Number(id));
 }
-
 
 // ============================================================
 // STEP 8 — TEST YOUR FUNCTIONS
