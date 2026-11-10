@@ -1,3 +1,7 @@
-const fs = require("fs");
+const chalk = require("chalk");
+const getNotes = require("./notes");
 
-fs.writeFileSync("notes.txt", "My name is Uloka Ngozi");
+console.log(getNotes());
+
+console.log(chalk.bgYellow.bold("Success"));
+console.log(chalk.blue.bgRed.bold("Hello"));
