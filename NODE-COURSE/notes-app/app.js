@@ -59,6 +59,7 @@ yargs.command({
     },
   },
   handler: function (argv) {
+    // console.log('Adding a new note!', argv);
     console.log("Title: " + argv.title + ". Body: " + argv.body);
   },
 });
